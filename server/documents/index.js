@@ -1,4 +1,4 @@
-module.export= ({name, recieptId, price1, price2}) =>{
+module.exports = ({name, receiptId, price1, price2}) =>{
     const today = new Date();
     return `
     <!DOCTYPE html>
@@ -51,13 +51,13 @@ module.export= ({name, recieptId, price1, price2}) =>{
     <div class="details">
       <p><label>Date:</label> ${`${today.getDate()}. ${today.getMonth()}. ${today.getFullYear()}`}</p>
       <p><label>Name:</label> ${name}</p>
-      <p><label>Receipt ID:</label> ${recieptId}</p>
+      <p><label>Receipt ID:</label> ${receiptId}</p>
       <p><label>Price 1:</label> ${price1}</p>
-      <p><label>Price 2:</label> ${price2}/p>
+      <p><label>Price 2:</label> ${price2} </p>
     </div>
 
     <div class="total">
-      <p>Total:  ${price1 + price2}</p>
+      <p>Total:  ${Number(price1) + Number(price2)}</p>
     </div>
   </div>
 

@@ -1,6 +1,6 @@
 import React ,{useState} from 'react'
 import axios from 'axios'
-import {SaveAs} from 'file-saver';
+import {saveAs} from 'file-saver';
 import './App.css';
 
 function App() {
@@ -11,9 +11,19 @@ function App() {
     price2: 0,
   })
 
- const handleChange = ({target: {value, name}}) =>{setData({[name]: value})}
+ const handleChange = ({target: {value, name}}) => {
+  setData((prevData) => ({
+    ...prevData, [name]: value
+  }))
+ }
  const createAndDownloadPdf = () =>{
   axios.post('/create-pdf', data)
+  .then(() => axios.get('/fetch-pdf', {responseType: 'blob'}))
+  .then((res) => {
+    const pdfBlob = new Blob([res.data], {type:'application/pdf'});
+
+    saveAs(pdfBlob, 'newPdf.pdf')
+  })
  }
 
   return (
